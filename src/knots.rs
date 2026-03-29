@@ -24,13 +24,13 @@ impl KnotVector {
     pub fn new(mut config: KnotVectorConfig) -> Self {
         let mut knots: Vec<Complex64> = Vec::with_capacity(config.n);
         let n_middle = config.n - 2 * config.multiplicity;
-        let step: f64 = (config.end - config.start) / ((n_middle - 1) as f64);
+        let step: f64 = (config.end - config.start) / ((n_middle + 1) as f64);
 
         for _ in 0..config.multiplicity {
             knots.push(Complex64::from(config.start));
         }
 
-        for idx in 0..n_middle {
+        for idx in 1..=n_middle {
             knots.push(Complex64::from(config.start + (idx as f64) * step));
         }
 

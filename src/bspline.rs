@@ -19,7 +19,7 @@ impl BSpline {
             n: n + order,
             r0,
             eta,
-            multiplicity: order,
+            multiplicity: order - 1,
         };
 
         let knot_vector = KnotVector::new(knot_vector_config);
