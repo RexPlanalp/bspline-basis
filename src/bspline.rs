@@ -38,7 +38,7 @@ impl BSpline {
     }
 
     pub fn dump_b(&self, resolution: f64) -> std::io::Result<()> {
-        let output_file = File::create("B.txt")?;
+        let output_file = File::create("output/B.txt")?;
         let mut writer = BufWriter::new(output_file);
 
         let x_range = arange(
@@ -54,7 +54,7 @@ impl BSpline {
             }
         }
 
-        let metadata_file = File::create("B_meta.txt")?;
+        let metadata_file = File::create("output/B_meta.txt")?;
         let mut writer = BufWriter::new(metadata_file);
 
         writeln!(writer, "{}", self.n)?;
@@ -100,7 +100,7 @@ impl BSpline {
     }
 
     pub fn dump_db(&self, resolution: f64) -> std::io::Result<()> {
-        let output_file = File::create("dB.txt")?;
+        let output_file = File::create("output/dB.txt")?;
         let mut writer = BufWriter::new(output_file);
 
         let x_range = arange(
@@ -116,7 +116,7 @@ impl BSpline {
             }
         }
 
-        let metadata_file = File::create("dB_meta.txt")?;
+        let metadata_file = File::create("output/dB_meta.txt")?;
         let mut writer = BufWriter::new(metadata_file);
 
         writeln!(writer, "{}", self.n)?;
