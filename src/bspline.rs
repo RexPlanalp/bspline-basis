@@ -84,6 +84,9 @@ impl BSpline {
     }
 
     pub fn db(&self, i: usize, x: f64) -> Complex64 {
+        if (i == 0) || (i == self.n - 1) {
+            return Complex64::from(0.0);
+        }
         let complex_x = ecs_x(x, self.knot_vector.config.r0, self.knot_vector.config.eta);
         self.db_recursive(i, complex_x, self.degree)
     }
