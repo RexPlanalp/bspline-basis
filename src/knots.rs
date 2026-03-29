@@ -2,6 +2,7 @@ use num_complex::Complex64;
 use std::fs::File;
 use std::io::{BufWriter, Write};
 use std::ops::{Index};
+use crate::util::ecs_x;
 
 #[derive(Debug)]
 pub struct KnotVectorConfig{
@@ -39,7 +40,7 @@ for _ in 0..config.multiplicity {
 
         config.r0 = Self::find_best_r0(&knots, config.r0);
 
-        let knots: Vec<Complex64> = knots.iter().map(|x| if x.re < config.r0 {*x} else {Complex64::new(config.r0, 0.0) + (x.re - config.r0) * Complex64::new(0.0, config.eta).exp()}).collect();
+        let knots: Vec<Complex64> = knots.iter().map(|x| {ecs_x(x.re, config.r0, config.eta)}).collect();
 
         Self { knots, config }
     }

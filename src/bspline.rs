@@ -3,7 +3,7 @@ use num_complex::{ComplexFloat,Complex64};
 use crate::util::arange;
 use std::fs::File;
 use std::io::{BufWriter, Write};
-
+use crate::util::ecs_x;
 pub struct BSpline {
     n: usize,
     order: usize,
@@ -28,7 +28,7 @@ impl BSpline {
     }
 
     pub fn b(&self, i: usize, x: f64) -> Complex64 {
-        let complex_x  = if x < self.knot_vector.config.r0 {Complex64::new(x, 0.0)} else {Complex64::new(self.knot_vector.config.r0, 0.0) + (x - self.knot_vector.config.r0) * Complex64::new(0.0, self.knot_vector.config.eta).exp()};
+        let complex_x  = ecs_x(x, self.knot_vector.config.r0, self.knot_vector.config.eta);
         self.b_recursive(i, complex_x, self.degree)
     }
 
