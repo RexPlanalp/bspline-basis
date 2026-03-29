@@ -54,6 +54,14 @@ impl BSpline {
             }
         }
 
+        let metadata_file = File::create("B_meta.txt")?;
+        let mut writer = BufWriter::new(metadata_file);
+
+        writeln!(writer, "{}", self.n)?;
+        for &x in &x_range {
+            writeln!(writer, "{x}")?;
+        }
+
         Ok(())
     }
 
