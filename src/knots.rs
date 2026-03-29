@@ -43,6 +43,10 @@ impl KnotVector {
         Self { knots, config }
     }
 
+    pub fn in_interval(&self, x: f64, i: usize) -> bool {
+        x >= self.knots[i].re && x < self.knots[i + 1].re
+    }
+
     pub fn dump(&self) -> std::io::Result<()> {
     let output_file = File::create("knots.txt")?;
     let mut writer = BufWriter::new(output_file);
