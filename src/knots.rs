@@ -1,6 +1,7 @@
 use num_complex::Complex64;
 use std::fs::File;
 use std::io::{BufWriter, Write};
+use std::ops::{Index};
 
 #[derive(Debug)]
 pub struct KnotVectorConfig{
@@ -68,5 +69,13 @@ impl KnotVector {
         }
 
         best_match
+    }
+}
+
+impl Index<usize> for KnotVector {
+    type Output = Complex64;
+
+    fn index(&self, index: usize) -> &Self::Output {
+        &self.knots[index]
     }
 }

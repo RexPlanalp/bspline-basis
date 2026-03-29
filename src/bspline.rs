@@ -1,4 +1,5 @@
 use crate::knots::{KnotVector, KnotVectorConfig};
+use num_complex::{ComplexFloat,Complex64};
 
 pub struct BSpline {
     n: usize,
@@ -22,4 +23,36 @@ impl BSpline {
 
         Self {n, order, degree: order -1, knot_vector}
     }
+
+    pub fn b(&self, i: usize, x: f64) -> Complex64 {
+        self.b_recursive(i, x, self.degree)
+    }
+
+    fn b_recursive(&self, i: usize, x: f64, degree:usize) -> Complex64 {
+        if degree == 0 {
+            return if self.knot_vector.in_interval(x, i) {
+                Complex64::new(1.0, 0.0)
+            }
+            else {
+                Complex64::new(0.0, 0.0)
+            }
+        }
+
+        let denom1 = self.knot_vector[i + degree] - self.knot_vector[i];
+        let denom2 = self.knot_vector[i + degree + 1] - self.knot_vector[i + 1];
+
+        let mut term1 = Complex64::new(0.0,0.0);
+        let mut term2 = Complex64::new(0.0,0.0);
+
+        if denom1.abs() != 0.0 {
+            term1 = (x - self.knot_vector[i]) / (denom1) * self.b_recursive(i, x, degree - 1);
+        }
+        if denom2.abs() != 0.0 {
+            term2 = (self.knot_vector[i + degree + 1] - x) / (denom2) * self.b_recursive(i + 1, x, degree - 1);
+        }
+
+
+        return term1 + term2;
+    }
+
 }
