@@ -1,6 +1,5 @@
 use crate::knots::{KnotVector, KnotVectorConfig};
-use crate::util::arange;
-use crate::util::ecs_x;
+use crate::util::{arange, ecs_x};
 use num_complex::{Complex64, ComplexFloat};
 use std::fs::File;
 use std::io::{BufWriter, Write};
@@ -45,6 +44,7 @@ impl BSpline {
             self.knot_vector.config.start,
             self.knot_vector.config.end,
             resolution,
+            true
         );
 
         for i in 0..self.n {
@@ -107,6 +107,7 @@ impl BSpline {
             self.knot_vector.config.start,
             self.knot_vector.config.end,
             resolution,
+            true
         );
 
         for i in 0..self.n {
