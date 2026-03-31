@@ -68,17 +68,17 @@ impl KnotVector {
         Ok(())
     }
 
-    fn find_best_r0(knots: &Vec<Complex64>, r0: f64) -> f64 {
-        let mut best_match = knots[0].re;
-
-        for x in &knots[1..] {
-            if (x.re - r0).abs() < (best_match - r0).abs() {
-                best_match = x.re;
-            }
-        }
-
-        best_match
-    }
+    fn find_best_r0(knots: &[Complex64], r0: f64) -> f64 {
+    knots.iter()
+        .filter(|z| !z.re.is_nan())
+        .min_by(|a, b| {
+            let da = (a.re - r0).abs();
+            let db = (b.re - r0).abs();
+            da.partial_cmp(&db).unwrap()
+        })
+        .map(|z| z.re)
+        .unwrap()
+}
 }
 
 impl Index<usize> for KnotVector {
