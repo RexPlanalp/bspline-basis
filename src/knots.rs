@@ -22,37 +22,35 @@ pub struct KnotVector {
 
 impl KnotVector {
     pub fn new(mut config: KnotVectorConfig) -> Self {
+        assert!(
+            config.n >= 2 * config.multiplicity,
+            "numbner of knots must be at least 2 * multiplicity"
+        );
+        assert!(
+            config.start <= config.end,
+             "start must be <= end"
+        );
         
         let n_middle = config.n - 2 * config.multiplicity;
         let step: f64 = (config.end - config.start) / ((n_middle + 1) as f64);
 
-        let mut knots_start: Vec<Complex64> = Vec::with_capacity(config.multiplicity);
-        for _ in 0..config.multiplicity {
-            knots_start.push(Complex64::from(config.start));
-        }
+        let real_knots: Vec<_> = std::iter::repeat_n(config.start, config.multiplicity)
+            .map(Complex64::from)
+            .chain(
+                (1..=n_middle)
+                    .map(|i| Complex64::from(config.start + i as f64 * step)),
+            )
+            .chain(std::iter::repeat_n(Complex64::from(config.end), config.multiplicity))
+            .collect();
 
-        let mut knots_middle: Vec<Complex64> = Vec::with_capacity(n_middle);
-        for idx in 1..=n_middle {
-            knots_middle.push(Complex64::from(config.start + (idx as f64) * step));
-        }
+        config.r0 = Self::find_best_r0(&real_knots, config.r0);
 
-        let mut knots_end: Vec<Complex64> = Vec::with_capacity(config.multiplicity);
-        for _ in 0..config.multiplicity {
-            knots_end.push(Complex64::from(config.end));
-        }
-
-        let mut knots: Vec<Complex64> = Vec::with_capacity(config.n);
-        knots.extend(knots_start);
-        knots.extend(knots_middle);
-        knots.extend(knots_end);
-        config.r0 = Self::find_best_r0(&knots, config.r0);
-
-        let knots: Vec<Complex64> = knots
+        let complex_knots: Vec<Complex64> = real_knots
             .iter()
             .map(|x| ecs_x(x.re, config.r0, config.eta))
             .collect();
 
-        Self { knots, config }
+        Self { knots: complex_knots, config }
     }
 
     pub fn in_interval(&self, x: f64, i: usize) -> bool {
