@@ -11,7 +11,7 @@ real = dB[:, 0].reshape(n_splines, n_x)
 imag = dB[:, 1].reshape(n_splines, n_x)
 
 for i in range(n_splines):
-    plt.plot(real[i], color = "k")
-    plt.plot(imag[i], color = "brown")
+    plt.plot(x, real[i], color = "k")
+    plt.plot(x, imag[i], color = "brown")
 
 plt.show()
