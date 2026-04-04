@@ -2,7 +2,7 @@ use std::f64::consts::PI;
 
 use complex_bspline::knots::complex::EcsConfig;
 use complex_bspline::bsplines::{basis::BSplineBasis, real::{ BSplineBasisConfig}, complex::{ComplexBSplineBasis, ComplexBSplineBasisConfig}};
-
+use complex_bspline::bsplines::dump::dump_basis;
 fn main() {
     let ecs_config = EcsConfig {
         r0: 5.0,
@@ -23,5 +23,5 @@ fn main() {
 
     let complex_basis = ComplexBSplineBasis::new(complex_bspline_basis_config);
 
-    complex_basis.dump(1000).expect("Should plot right now");
+    dump_basis(complex_basis, 1000).expect("Should dump");
 }
