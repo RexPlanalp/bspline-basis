@@ -1,5 +1,5 @@
 use crate::knots::knot_vector::KnotVector;
-use crate::util::arange;
+use crate::sampling::arange;
 use crate::scalar::BSplineScalar;
 use std::fs::File;
 use std::io::{BufWriter, Write};

@@ -4,7 +4,7 @@ use crate::knots::knot_vector::KnotVector;
 use crate::bsplines::real::BSplineBasisConfig;
 use crate::knots::real::{KnotConfig, RealKnotVector};
 use num_complex::Complex64;
-use crate::util::{ecs_x, find_best_r0};
+use crate::ecs::{ecs_x, find_best_r0};
 
 pub struct ComplexBSplineBasisConfig {
     pub config: BSplineBasisConfig,
