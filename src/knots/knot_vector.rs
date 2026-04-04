@@ -1,7 +1,4 @@
 use crate::scalar::BSplineScalar;
-use std::fs::File;
-use std::io::{BufWriter, Write};
-use std::path::Path;
 
 pub trait KnotVector<T: BSplineScalar> {
     type Config;
@@ -12,18 +9,6 @@ pub trait KnotVector<T: BSplineScalar> {
 
     fn get_outfile(&self) -> &'static str {
         "knots.txt"
-    }
-
-    fn dump(&self) -> std::io::Result<()> {
-        let path = Path::new("output").join(self.get_outfile());
-        let output_file = File::create(path)?;
-        let mut writer = BufWriter::new(output_file);
-
-        for x in self.get_knots() {
-            writeln!(writer, "{} {}", x.re(), x.im())?;
-        }
-
-        Ok(())
     }
 
     fn in_interval(&self, x: f64, i: usize) -> bool {

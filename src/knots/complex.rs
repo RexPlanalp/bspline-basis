@@ -65,10 +65,6 @@ impl KnotVector<Complex64> for ComplexKnotVector {
         &self.knots
     }
 
-    fn get_outfile(&self) -> &'static str {
-        "complex_knots.txt"
-    }
-
     fn get_start(&self) -> f64 {
         self.config.knot_config.start
     }

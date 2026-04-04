@@ -3,6 +3,7 @@ use ndarray::linspace;
 use crate::scalar::BSplineScalar;
 use std::fs::File;
 use std::io::{BufWriter, Write};
+use crate::knots::dump::dump_knots;
 pub trait BSplineBasis<T: BSplineScalar> {
     type Config;
     type KV: KnotVector<T>;
@@ -70,6 +71,8 @@ pub trait BSplineBasis<T: BSplineScalar> {
     }
 
     fn dump(&self, samples: usize) -> std::io::Result<()> {
+        dump_knots(self.get_knot_vector()).expect("Should dump");
+
         let output_file = File::create("output/B.txt")?;
         let mut writer = BufWriter::new(output_file);
 
