@@ -4,6 +4,7 @@ use crate::knots::knot_vector::KnotVector;
 use crate::bsplines::real::BSplineBasisConfig;
 use crate::knots::real::{KnotConfig, RealKnotVector};
 use num_complex::Complex64;
+use crate::util::{ecs_x, find_best_r0};
 
 pub struct ComplexBSplineBasisConfig {
     pub config: BSplineBasisConfig,
@@ -14,29 +15,6 @@ pub struct ComplexBSplineBasis {
     knot_vector: ComplexKnotVector,
     config: ComplexBSplineBasisConfig,
     degree: usize,
-}
-
-impl ComplexBSplineBasis {
-    fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
-        knots
-            .iter()
-            .copied()
-            .filter(|z| !z.is_nan())
-            .min_by(|a, b| {
-                let da = (a - r0).abs();
-                let db = (b - r0).abs();
-                da.partial_cmp(&db).unwrap()
-            })
-            .unwrap()
-    }
-
-    pub fn ecs_x(x: f64, r0: f64, eta: f64) -> Complex64 {
-        if x < r0 {
-            Complex64::from(x)
-        } else {
-            r0 + (x - r0) * Complex64::new(0.0, eta).exp()
-        }
-    }
 }
 
 impl BSplineBasis<Complex64> for ComplexBSplineBasis {
@@ -61,7 +39,7 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
         });
 
         config.ecs_config.r0 =
-            Self::find_best_r0(real_knot_vector.get_knots(), config.ecs_config.r0);
+            find_best_r0(real_knot_vector.get_knots(), config.ecs_config.r0);
 
         let complex_knot_config = ComplexKnotConfig {
             knot_config,
@@ -81,12 +59,12 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
     }
 
     fn b(&self, i: usize, x: f64) -> Complex64 {
-        let x_complex = Self::ecs_x(x, self.config.ecs_config.r0, self.config.ecs_config.eta);
+        let x_complex = ecs_x(x, self.config.ecs_config.r0, self.config.ecs_config.eta);
         self.b_internal(i, x_complex, self.degree)
     }
 
     fn db(&self, i: usize, x: f64) -> Complex64 {
-        let x_complex = Self::ecs_x(x, self.config.ecs_config.r0, self.config.ecs_config.eta);
+        let x_complex = ecs_x(x, self.config.ecs_config.r0, self.config.ecs_config.eta);
         self.db_internal(i, x_complex, self.degree)
     }
 
