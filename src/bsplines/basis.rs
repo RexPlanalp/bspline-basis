@@ -1,5 +1,5 @@
 use crate::knots::knot_vector::KnotVector;
-use crate::sampling::arange;
+use ndarray::linspace;
 use crate::scalar::BSplineScalar;
 use std::fs::File;
 use std::io::{BufWriter, Write};
@@ -69,16 +69,11 @@ pub trait BSplineBasis<T: BSplineScalar> {
         term1 - term2
     }
 
-    fn dump(&self, resolution: f64) -> std::io::Result<()> {
+    fn dump(&self, samples: usize) -> std::io::Result<()> {
         let output_file = File::create("output/B.txt")?;
         let mut writer = BufWriter::new(output_file);
 
-        let x_range = arange(
-            self.get_knot_vector().get_start(),
-            self.get_knot_vector().get_end(),
-            resolution,
-            true,
-        );
+        let x_range: Vec<f64> = linspace(self.get_knot_vector().get_start(), self.get_knot_vector().get_end(), samples).collect();
 
         for i in 0..self.get_n_basis() {
             for &x in &x_range {

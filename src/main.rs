@@ -23,5 +23,5 @@ fn main() {
 
     let complex_basis = ComplexBSplineBasis::new(complex_bspline_basis_config);
 
-    complex_basis.dump(0.01).expect("Should plot right now");
+    complex_basis.dump(1000).expect("Should plot right now");
 }
