@@ -1,24 +1,25 @@
 use crate::bspline_basis::BSplineBasis;
-use crate::knot_vector::KnotVector;
 use crate::complex_knot_vector::{ComplexKnotConfig, ComplexKnotVector, EcsConfig};
+use crate::knot_vector::KnotVector;
 use crate::real_bspline_basis::BSplineBasisConfig;
-use crate::real_knot_vector::{RealKnotVector, KnotConfig};
+use crate::real_knot_vector::{KnotConfig, RealKnotVector};
 use num_complex::Complex64;
 
 pub struct ComplexBSplineBasisConfig {
     pub config: BSplineBasisConfig,
-    pub ecs_config: EcsConfig
+    pub ecs_config: EcsConfig,
 }
 
 pub struct ComplexBSplineBasis {
     knot_vector: ComplexKnotVector,
     config: ComplexBSplineBasisConfig,
-    degree: usize
+    degree: usize,
 }
 
 impl ComplexBSplineBasis {
-     fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
-        knots.iter()
+    fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
+        knots
+            .iter()
             .copied()
             .filter(|z| !z.is_nan())
             .min_by(|a, b| {
@@ -30,12 +31,12 @@ impl ComplexBSplineBasis {
     }
 
     pub fn ecs_x(x: f64, r0: f64, eta: f64) -> Complex64 {
-    if x < r0 {
-        Complex64::from(x)
-    } else {
-        r0 + (x - r0) * Complex64::new(0.0, eta).exp()
+        if x < r0 {
+            Complex64::from(x)
+        } else {
+            r0 + (x - r0) * Complex64::new(0.0, eta).exp()
+        }
     }
-}
 }
 
 impl BSplineBasis<Complex64> for ComplexBSplineBasis {
@@ -49,29 +50,34 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
             n_knots: config.config.n_basis + config.config.order,
             multiplicity: config.config.order - 1,
             start: config.config.start,
-            end: config.config.end
+            end: config.config.end,
         };
 
         let real_knot_vector = RealKnotVector::build(KnotConfig {
             n_knots: knot_config.n_knots,
             multiplicity: knot_config.multiplicity,
             start: knot_config.start,
-            end: knot_config.end
+            end: knot_config.end,
         });
 
-        config.ecs_config.r0 = Self::find_best_r0(real_knot_vector.get_knots(), config.ecs_config.r0);
+        config.ecs_config.r0 =
+            Self::find_best_r0(real_knot_vector.get_knots(), config.ecs_config.r0);
 
         let complex_knot_config = ComplexKnotConfig {
-            knot_config, 
+            knot_config,
             ecs_config: EcsConfig {
                 r0: config.ecs_config.r0,
-                eta: config.ecs_config.eta
-            }
+                eta: config.ecs_config.eta,
+            },
         };
 
         let complex_knot_vector = ComplexKnotVector::build(complex_knot_config);
 
-        Self {knot_vector: complex_knot_vector, config, degree}
+        Self {
+            knot_vector: complex_knot_vector,
+            config,
+            degree,
+        }
     }
 
     fn b(&self, i: usize, x: f64) -> Complex64 {
@@ -91,5 +97,4 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
     fn get_n_basis(&self) -> usize {
         self.config.config.n_basis
     }
-
 }

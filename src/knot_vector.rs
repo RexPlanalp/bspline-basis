@@ -1,7 +1,7 @@
-use num_complex::{ComplexFloat};
-use num_traits::{Zero, One, FromPrimitive};
-use std::io::{BufWriter, Write};
+use num_complex::ComplexFloat;
+use num_traits::{FromPrimitive, One, Zero};
 use std::fs::File;
+use std::io::{BufWriter, Write};
 use std::path::Path;
 
 pub trait KnotVector<T: ComplexFloat<Real = f64> + Zero + One + FromPrimitive> {

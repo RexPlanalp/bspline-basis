@@ -1,16 +1,16 @@
-use num_complex::ComplexFloat;
-use num_traits::{Zero, One, FromPrimitive};
 use crate::knot_vector::KnotVector;
+use crate::util::arange;
+use num_complex::ComplexFloat;
+use num_traits::{FromPrimitive, One, Zero};
 use std::fs::File;
 use std::io::{BufWriter, Write};
-use crate::util::arange;
 pub trait BSplineBasis<T: ComplexFloat<Real = f64> + Zero + One + FromPrimitive> {
     type Config;
     type KV: KnotVector<T>;
 
     fn new(config: Self::Config) -> Self;
-    fn b(&self, i:usize, x: f64) -> T;
-    fn db(&self, i: usize, x: f64) -> T; 
+    fn b(&self, i: usize, x: f64) -> T;
+    fn db(&self, i: usize, x: f64) -> T;
     fn get_knot_vector(&self) -> &Self::KV;
     fn get_n_basis(&self) -> usize;
 
@@ -23,13 +23,14 @@ pub trait BSplineBasis<T: ComplexFloat<Real = f64> + Zero + One + FromPrimitive>
             };
         }
 
-  
-
-        let denom1 = self.get_knot_vector().get_knots()[i + degree] - self.get_knot_vector().get_knots()[i];
-        let denom2 = self.get_knot_vector().get_knots()[i + degree + 1] - self.get_knot_vector().get_knots()[i + 1];
+        let denom1 =
+            self.get_knot_vector().get_knots()[i + degree] - self.get_knot_vector().get_knots()[i];
+        let denom2 = self.get_knot_vector().get_knots()[i + degree + 1]
+            - self.get_knot_vector().get_knots()[i + 1];
 
         let term1 = if denom1.abs() > 0.0 {
-            (x - self.get_knot_vector().get_knots()[i]) / (denom1) * self.b_internal(i, x, degree - 1)
+            (x - self.get_knot_vector().get_knots()[i]) / (denom1)
+                * self.b_internal(i, x, degree - 1)
         } else {
             T::zero()
         };
@@ -46,12 +47,13 @@ pub trait BSplineBasis<T: ComplexFloat<Real = f64> + Zero + One + FromPrimitive>
 
     fn db_internal(&self, i: usize, x: T, degree: usize) -> T {
         if degree == 0 {
-            return T::zero()
+            return T::zero();
         }
 
-        let denom1 = self.get_knot_vector().get_knots()[i + degree] - self.get_knot_vector().get_knots()[i];
-        let denom2 = self.get_knot_vector().get_knots()[i + degree + 1] - self.get_knot_vector().get_knots()[i + 1];
-
+        let denom1 =
+            self.get_knot_vector().get_knots()[i + degree] - self.get_knot_vector().get_knots()[i];
+        let denom2 = self.get_knot_vector().get_knots()[i + degree + 1]
+            - self.get_knot_vector().get_knots()[i + 1];
 
         let term1 = if denom1.abs() > 0.0 {
             T::from_usize(degree).unwrap() / denom1 * self.b_internal(i, x, degree - 1)

@@ -5,21 +5,24 @@ pub struct KnotConfig {
     pub multiplicity: usize,
     pub start: f64,
     pub end: f64,
-
 }
 pub struct RealKnotVector {
     knots: Vec<f64>,
-    config: KnotConfig
+    config: KnotConfig,
 }
 
 impl KnotVector<f64> for RealKnotVector {
     type Config = KnotConfig;
 
     fn build(config: Self::Config) -> Self {
+        let knots = Self::build_linear_knots(
+            config.n_knots,
+            config.multiplicity,
+            config.start,
+            config.end,
+        );
 
-        let knots = Self::build_linear_knots(config.n_knots, config.multiplicity, config.start, config.end);
-
-        Self{ knots, config }
+        Self { knots, config }
     }
 
     fn get_knots(&self) -> &[f64] {

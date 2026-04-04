@@ -1,5 +1,3 @@
-
-
 pub fn arange(start: f64, end: f64, step: f64, inclusive: bool) -> Vec<f64> {
     let span = end - start;
 
