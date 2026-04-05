@@ -1,15 +1,14 @@
 use crate::bsplines::basis::BSplineBasis;
 use crate::knots::dump::dump_knots;
 use crate::knots::knot_vector::KnotVector;
-use crate::scalar::BSplineScalar;
+use num_complex::ComplexFloat;
 use ndarray::linspace;
 use std::fs::File;
 use std::io::{BufWriter, Write};
 
-pub fn dump_basis<T, B>(basis: &B, samples: usize) -> std::io::Result<()>
+pub fn dump_basis<B>(basis: &B, samples: usize) -> std::io::Result<()>
 where
-    T: BSplineScalar,
-    B: BSplineBasis<T>,
+    B: BSplineBasis,
 {
     dump_knots(basis.knot_vector())?;
 

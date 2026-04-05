@@ -18,7 +18,7 @@ pub struct ComplexBSplineBasis {
     degree: usize,
 }
 
-impl BSplineBasis<Complex64> for ComplexBSplineBasis {
+impl BSplineBasis for ComplexBSplineBasis {
     type Config = ComplexBSplineBasisConfig;
     type KV = ComplexKnotVector;
 

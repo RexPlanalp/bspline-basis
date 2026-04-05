@@ -1,13 +1,12 @@
 use crate::knots::knot_vector::KnotVector;
-use crate::scalar::BSplineScalar;
 
-pub trait BSplineBasis<T: BSplineScalar> {
+pub trait BSplineBasis {
     type Config;
     type KV: KnotVector;
 
     fn new(config: Self::Config) -> Self;
-    fn b(&self, i: usize, x: f64) -> T;
-    fn db(&self, i: usize, x: f64) -> T;
+    fn b(&self, i: usize, x: f64) -> <Self::KV as KnotVector>::Scalar;
+    fn db(&self, i: usize, x: f64) -> <Self::KV as KnotVector>::Scalar;
     fn knot_vector(&self) -> &Self::KV;
     fn n_basis(&self) -> usize;
 }

@@ -15,7 +15,7 @@ pub struct RealBSplineBasis {
     degree: usize,
 }
 
-impl BSplineBasis<f64> for RealBSplineBasis {
+impl BSplineBasis for RealBSplineBasis {
     type Config = BSplineBasisConfig;
     type KV = RealKnotVector;
 
