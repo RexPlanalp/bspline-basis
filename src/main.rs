@@ -23,5 +23,5 @@ fn main() {
 
     let complex_basis = ComplexBSplineBasis::new(complex_bspline_basis_config);
 
-    dump_basis(complex_basis, 1000).expect("Should dump");
+    dump_basis(&complex_basis, 1000).expect("Should dump");
 }

@@ -6,12 +6,12 @@ use std::io::{BufWriter, Write};
 use ndarray::linspace;
 use crate::knots::knot_vector::KnotVector;
 
-pub fn dump_basis<T:, B>(basis: B, samples: usize) -> std::io::Result<()> 
+pub fn dump_basis<T, B>(basis: &B, samples: usize) -> std::io::Result<()> 
 where 
     T: BSplineScalar,
     B: BSplineBasis<T>
     {
-        dump_knots(basis.get_knot_vector()).expect("Should dump");
+        dump_knots(basis.get_knot_vector())?;
 
         let output_file = File::create("output/B.txt")?;
         let mut writer = BufWriter::new(output_file);
