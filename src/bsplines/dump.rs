@@ -11,19 +11,19 @@ where
     T: BSplineScalar,
     B: BSplineBasis<T>,
 {
-    dump_knots(basis.get_knot_vector())?;
+    dump_knots(basis.knot_vector())?;
 
     let output_file = File::create("output/B.txt")?;
     let mut writer = BufWriter::new(output_file);
 
     let x_range: Vec<f64> = linspace(
-        basis.get_knot_vector().get_start(),
-        basis.get_knot_vector().get_end(),
+        basis.knot_vector().start(),
+        basis.knot_vector().end(),
         samples,
     )
     .collect();
 
-    for i in 0..basis.get_n_basis() {
+    for i in 0..basis.n_basis() {
         for &x in &x_range {
             let eval = basis.b(i, x);
             writeln!(writer, "{} {}", eval.re(), eval.im())?;
@@ -33,7 +33,7 @@ where
     let output_file = File::create("output/dB.txt")?;
     let mut writer = BufWriter::new(output_file);
 
-    for i in 0..basis.get_n_basis() {
+    for i in 0..basis.n_basis() {
         for &x in &x_range {
             let eval = basis.db(i, x);
             writeln!(writer, "{} {}", eval.re(), eval.im())?;
@@ -43,7 +43,7 @@ where
     let metadata_file = File::create("output/basis_meta.txt")?;
     let mut writer = BufWriter::new(metadata_file);
 
-    writeln!(writer, "{}", basis.get_n_basis())?;
+    writeln!(writer, "{}", basis.n_basis())?;
     for &x in &x_range {
         writeln!(writer, "{x}")?;
     }

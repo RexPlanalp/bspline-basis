@@ -40,15 +40,15 @@ impl KnotVector for ComplexKnotVector {
         }
     }
 
-    fn get_knots(&self) -> &[Complex64] {
+    fn knots(&self) -> &[Complex64] {
         &self.knots
     }
 
-    fn get_start(&self) -> f64 {
+    fn start(&self) -> f64 {
         self.config.knot_config.start
     }
 
-    fn get_end(&self) -> f64 {
+    fn end(&self) -> f64 {
         self.config.knot_config.end
     }
 }

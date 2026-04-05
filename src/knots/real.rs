@@ -25,15 +25,15 @@ impl KnotVector for RealKnotVector {
         Self { knots, config }
     }
 
-    fn get_knots(&self) -> &[f64] {
+    fn knots(&self) -> &[f64] {
         &self.knots
     }
 
-    fn get_start(&self) -> f64 {
+    fn start(&self) -> f64 {
         self.config.start
     }
 
-    fn get_end(&self) -> f64 {
+    fn end(&self) -> f64 {
         self.config.end
     }
 }

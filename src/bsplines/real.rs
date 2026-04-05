@@ -46,11 +46,11 @@ impl BSplineBasis<f64> for RealBSplineBasis {
         db_internal(i, x, &self.knot_vector, self.degree)
     }
 
-    fn get_knot_vector(&self) -> &Self::KV {
+    fn knot_vector(&self) -> &Self::KV {
         &self.knot_vector
     }
 
-    fn get_n_basis(&self) -> usize {
+    fn n_basis(&self) -> usize {
         self.config.n_basis
     }
 }

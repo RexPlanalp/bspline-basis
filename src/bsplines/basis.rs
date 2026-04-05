@@ -8,6 +8,6 @@ pub trait BSplineBasis<T: BSplineScalar> {
     fn new(config: Self::Config) -> Self;
     fn b(&self, i: usize, x: f64) -> T;
     fn db(&self, i: usize, x: f64) -> T;
-    fn get_knot_vector(&self) -> &Self::KV;
-    fn get_n_basis(&self) -> usize;
+    fn knot_vector(&self) -> &Self::KV;
+    fn n_basis(&self) -> usize;
 }

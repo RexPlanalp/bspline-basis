@@ -15,7 +15,7 @@ where
         };
     }
 
-    let knots = knot_vector.get_knots();
+    let knots = knot_vector.knots();
 
     let denom1 = knots[i + degree] - knots[i];
     let denom2 = knots[i + degree + 1] - knots[i + 1];
@@ -43,7 +43,7 @@ where
         return K::Scalar::zero();
     }
 
-    let knots = knot_vector.get_knots();
+    let knots = knot_vector.knots();
 
     let denom1 = knots[i + degree] - knots[i];
     let denom2 = knots[i + degree + 1] - knots[i + 1];

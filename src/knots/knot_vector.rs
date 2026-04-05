@@ -6,14 +6,14 @@ pub trait KnotVector {
 
     fn build(config: Self::Config) -> Self;
 
-    fn get_knots(&self) -> &[Self::Scalar];
+    fn knots(&self) -> &[Self::Scalar];
 
-    fn get_outfile(&self) -> &'static str {
+    fn outfile(&self) -> &'static str {
         "knots.txt"
     }
 
     fn in_interval(&self, x: Self::Scalar, i: usize) -> bool {
-        x.re() >= self.get_knots()[i].re() && x.re() < self.get_knots()[i + 1].re()
+        x.re() >= self.knots()[i].re() && x.re() < self.knots()[i + 1].re()
     }
 
     fn validate_knot_config(n_knots: usize, multiplicity: usize, start: f64, end: f64) {
@@ -35,6 +35,6 @@ pub trait KnotVector {
             .collect()
     }
 
-    fn get_start(&self) -> f64;
-    fn get_end(&self) -> f64;
+    fn start(&self) -> f64;
+    fn end(&self) -> f64;
 }

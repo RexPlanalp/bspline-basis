@@ -39,7 +39,7 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
             end: knot_config.end,
         });
 
-        config.ecs_config.r0 = find_best_r0(real_knot_vector.get_knots(), config.ecs_config.r0);
+        config.ecs_config.r0 = find_best_r0(real_knot_vector.knots(), config.ecs_config.r0);
 
         let complex_knot_config = ComplexKnotConfig {
             knot_config,
@@ -68,11 +68,11 @@ impl BSplineBasis<Complex64> for ComplexBSplineBasis {
         db_internal(i, x_complex, &self.knot_vector, self.degree)
     }
 
-    fn get_knot_vector(&self) -> &Self::KV {
+    fn knot_vector(&self) -> &Self::KV {
         &self.knot_vector
     }
 
-    fn get_n_basis(&self) -> usize {
+    fn n_basis(&self) -> usize {
         self.config.config.n_basis
     }
 }
