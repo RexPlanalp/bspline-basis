@@ -16,6 +16,10 @@ pub trait KnotVector {
         x.re() >= self.knots()[i].re() && x.re() < self.knots()[i + 1].re()
     }
 
+    fn interval(&self, i: usize) -> (Self::Scalar, Self::Scalar) {
+        (self.knots()[i], self.knots()[i + 1])
+    }
+
     fn validate_knot_config(n_knots: usize, multiplicity: usize, start: f64, end: f64) {
         assert!(
             n_knots >= 2 * multiplicity,

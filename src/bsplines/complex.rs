@@ -77,4 +77,12 @@ impl BSplineBasis for ComplexBSplineBasis {
     fn n_basis(&self) -> usize {
         self.config.config.n_basis
     }
+
+    fn order(&self) -> usize {
+        self.config.config.order
+    }
+
+    fn degree(&self) -> usize {
+        self.degree
+    }
 }

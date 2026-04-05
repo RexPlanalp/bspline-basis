@@ -55,4 +55,12 @@ impl BSplineBasis for RealBSplineBasis {
     fn n_basis(&self) -> usize {
         self.config.n_basis
     }
+
+    fn order(&self) -> usize {
+        self.config.order
+    }
+
+    fn degree(&self) -> usize {
+        self.degree
+    }
 }

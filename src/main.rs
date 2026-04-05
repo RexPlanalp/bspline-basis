@@ -6,6 +6,7 @@ use bspline_basis::bsplines::{
     real::BSplineBasisConfig,
 };
 use bspline_basis::knots::complex::EcsConfig;
+use bspline_basis::integrator::BSplineBasisIntegrator;
 fn main() {
     let ecs_config = EcsConfig {
         r0: 5.0,
@@ -25,6 +26,11 @@ fn main() {
     };
 
     let complex_basis = ComplexBSplineBasis::new(complex_bspline_basis_config);
+
+    let integrator = BSplineBasisIntegrator::new(&complex_basis);
+    let val = integrator.integrate(28, 28);
+
+    println!("{val}");
 
     dump_basis(&complex_basis, 1000).expect("Should dump");
 }
