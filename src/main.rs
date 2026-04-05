@@ -2,7 +2,6 @@ use std::f64::consts::PI;
 
 use bspline_basis::bsplines::dump::dump_basis;
 use bspline_basis::bsplines::{
-    basis::BSplineBasis,
     complex::{ComplexBSplineBasis, ComplexBSplineBasisConfig},
     real::BSplineBasisConfig,
 };

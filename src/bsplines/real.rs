@@ -15,11 +15,8 @@ pub struct RealBSplineBasis {
     degree: usize,
 }
 
-impl BSplineBasis for RealBSplineBasis {
-    type Config = BSplineBasisConfig;
-    type KV = RealKnotVector;
-
-    fn new(config: Self::Config) -> Self {
+impl RealBSplineBasis {
+    pub fn new(config: BSplineBasisConfig) -> Self {
         let degree = config.order - 1;
 
         let knot_config = KnotConfig {
@@ -37,6 +34,11 @@ impl BSplineBasis for RealBSplineBasis {
             degree,
         }
     }
+}
+
+impl BSplineBasis for RealBSplineBasis {
+    type Config = BSplineBasisConfig;
+    type KV = RealKnotVector;
 
     fn b(&self, i: usize, x: f64) -> f64 {
         b_internal(i, x, &self.knot_vector, self.degree)

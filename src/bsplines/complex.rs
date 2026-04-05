@@ -18,11 +18,8 @@ pub struct ComplexBSplineBasis {
     degree: usize,
 }
 
-impl BSplineBasis for ComplexBSplineBasis {
-    type Config = ComplexBSplineBasisConfig;
-    type KV = ComplexKnotVector;
-
-    fn new(mut config: Self::Config) -> Self {
+impl ComplexBSplineBasis {
+    pub fn new(mut config: ComplexBSplineBasisConfig) -> Self {
         let degree = config.config.order - 1;
 
         let knot_config = KnotConfig {
@@ -57,6 +54,11 @@ impl BSplineBasis for ComplexBSplineBasis {
             degree,
         }
     }
+}
+
+impl BSplineBasis for ComplexBSplineBasis {
+    type Config = ComplexBSplineBasisConfig;
+    type KV = ComplexKnotVector;
 
     fn b(&self, i: usize, x: f64) -> Complex64 {
         let x_complex = ecs_x(x, self.config.ecs_config.r0, self.config.ecs_config.eta);

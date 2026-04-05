@@ -1,8 +1,8 @@
 use crate::bsplines::basis::BSplineBasis;
 use crate::knots::dump::dump_knots;
 use crate::knots::knot_vector::KnotVector;
-use num_complex::ComplexFloat;
 use ndarray::linspace;
+use num_complex::ComplexFloat;
 use std::fs::File;
 use std::io::{BufWriter, Write};
 
