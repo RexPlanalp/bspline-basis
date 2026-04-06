@@ -2,6 +2,7 @@ use std::fmt;
 pub enum BSplineError {
     InvalidNumberOfKnots { n_knots: usize, multiplicity: usize },
     InvalidKnotRange { start: f64, end: f64 },
+    InvalidEta {eta: f64}
 }
 
 pub type Result<T> = std::result::Result<T, BSplineError>;
@@ -22,6 +23,9 @@ impl fmt::Display for BSplineError {
             }
             BSplineError::InvalidKnotRange { start, end } => {
                 write!(f, "Start: {} should be less than end: {}.", start, end)
+            }
+            BSplineError::InvalidEta { eta } => {
+                write!(f, "Eta: {} should be less than 90 degrees.", eta)
             }
         }
     }

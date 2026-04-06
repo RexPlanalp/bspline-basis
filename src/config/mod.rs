@@ -4,3 +4,4 @@ pub trait Config {
 }
 
 pub mod knots;
+pub mod ecs;
