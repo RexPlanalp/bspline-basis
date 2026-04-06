@@ -1,0 +1,39 @@
+use num_complex::Complex64;
+use num_traits::{One, Zero};
+
+pub trait BSplineScalar: Copy + Zero + One {
+    fn from_usize(n: usize) -> Self;
+    fn from_f64(f: f64) -> Self;
+    fn real(self) -> f64;
+    fn abs_f64(self) -> f64;
+}
+
+impl BSplineScalar for f64 {
+    fn from_usize(n: usize) -> Self {
+        n as f64
+    }
+    fn from_f64(f: f64) -> Self {
+        f
+    }
+    fn real(self) -> f64 {
+        self
+    }
+    fn abs_f64(self) -> f64 {
+        self.abs()
+    }
+}
+
+impl BSplineScalar for Complex64 {
+    fn from_usize(n: usize) -> Self {
+        Complex64::new(n as f64, 0.0)
+    }
+    fn from_f64(f: f64) -> Self {
+        Complex64::new(f, 0.0)
+    }
+    fn real(self) -> f64 {
+        self.re
+    }
+    fn abs_f64(self) -> f64 {
+        self.norm()
+    }
+}

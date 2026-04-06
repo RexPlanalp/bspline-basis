@@ -3,6 +3,6 @@ pub trait Config {
     fn validate(&self) -> Result<()>;
 }
 
-pub mod knots;
-pub mod ecs;
 pub mod basis;
+pub mod ecs;
+pub mod knots;
