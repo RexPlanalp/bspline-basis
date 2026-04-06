@@ -1,7 +1,6 @@
-use crate::{
-    config::{Config, Result},
-    error::BSplineError,
-};
+use crate::{error::BSplineError, error::Result};
+
+use crate::core::config::Config;
 pub struct KnotConfig {
     pub n_knots: usize,
     pub multiplicity: usize,

@@ -1,7 +1,7 @@
-use crate::config::Config;
 use crate::config::knots::KnotConfig;
+use crate::core::config::Config;
+use crate::core::knot_vector::KnotVector;
 use crate::error::Result;
-use crate::knots::KnotVector;
 use crate::knots::builder::build_linear_knots;
 
 pub struct RealKnotVector {

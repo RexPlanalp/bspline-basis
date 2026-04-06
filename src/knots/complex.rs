@@ -1,8 +1,8 @@
-use crate::config::Config;
 use crate::config::ecs::EcsConfig;
 use crate::config::knots::KnotConfig;
+use crate::core::config::Config;
+use crate::core::knot_vector::KnotVector;
 use crate::error::Result;
-use crate::knots::KnotVector;
 use crate::knots::builder::build_linear_knots;
 use crate::transform::ecs::{ecs_x, find_best_r0};
 use num_complex::Complex64;

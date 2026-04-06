@@ -1,9 +1,8 @@
 use std::f64::consts::PI;
 
-use crate::{
-    config::{Config, Result},
-    error::BSplineError,
-};
+use crate::{error::BSplineError, error::Result};
+
+use crate::core::config::Config;
 pub struct EcsConfig {
     pub r0: f64,
     pub eta: f64,
