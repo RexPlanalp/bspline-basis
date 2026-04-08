@@ -23,5 +23,5 @@ fn main() {
 
     let basis_dumper = BasisDump{samples: 1000};
 
-    basis_dumper.dump(&complex_basis).expect("Error Dumping BSpline Basis");
+    basis_dumper.dump(&complex_basis).expect("Failed to dump BSpline Basis");
 }
