@@ -1,5 +1,3 @@
-use crate::core::knot_vector::KnotVector;
-
-pub trait Dump {
-    fn dump<K: KnotVector>(&self, kv: &K) -> std::io::Result<()>;
+pub trait Dump<T> {
+    fn dump(&self, obj: &T) -> std::io::Result<()>;
 }

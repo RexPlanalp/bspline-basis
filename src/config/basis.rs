@@ -3,7 +3,7 @@ use crate::{error::BSplineError, error::Result};
 use crate::core::config::Config;
 
 pub struct BasisConfig {
-    pub n_knots: usize,
+    pub n_basis: usize,
     pub order: usize,
     pub start: f64,
     pub end: f64,
@@ -11,9 +11,9 @@ pub struct BasisConfig {
 
 impl Config for BasisConfig {
     fn validate(&self) -> Result<()> {
-        if !(self.n_knots > 0) {
+        if !(self.n_basis > 0) {
             return Err(BSplineError::InvalidNumberOfBasis {
-                n_knots: self.n_knots,
+                n_basis: self.n_basis,
             });
         }
         if !(self.start > self.end) {

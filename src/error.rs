@@ -1,9 +1,10 @@
 use std::fmt::{self};
+#[derive(Debug)]
 pub enum BSplineError {
     InvalidNumberOfKnots { n_knots: usize, multiplicity: usize },
     InvalidKnotRange { start: f64, end: f64 },
     InvalidEta { eta: f64 },
-    InvalidNumberOfBasis { n_knots: usize },
+    InvalidNumberOfBasis { n_basis: usize },
     InvalidBasisRange { start: f64, end: f64 },
     InvalidOrder { order: usize },
 }
@@ -30,11 +31,11 @@ impl fmt::Display for BSplineError {
             BSplineError::InvalidEta { eta } => {
                 write!(f, "Eta: {} should be less than 90 degrees.", eta)
             }
-            BSplineError::InvalidNumberOfBasis { n_knots } => {
+            BSplineError::InvalidNumberOfBasis { n_basis } => {
                 write!(
                     f,
                     "Number of knots: {} should be greater than or equal to zero.",
-                    n_knots
+                    n_basis
                 )
             }
             BSplineError::InvalidOrder { order } => {

@@ -16,7 +16,7 @@ impl Config for KnotConfig {
                 multiplicity: self.multiplicity,
             });
         }
-        if !(self.start > self.end) {
+        if !(self.start < self.end) {
             return Err(BSplineError::InvalidKnotRange {
                 start: self.start,
                 end: self.end,
