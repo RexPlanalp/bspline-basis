@@ -28,7 +28,7 @@ impl BSplineBasis for ComplexBSplineBasis {
     }
 
     fn n_basis(&self) -> usize {
-        self.config.order
+        self.config.n_basis
     }
 
     fn order(&self) -> usize {
