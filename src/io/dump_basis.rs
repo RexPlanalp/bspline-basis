@@ -1,7 +1,7 @@
 use crate::core::dump::Dump;
 use crate::core::basis::BSplineBasis;
 use crate::core::scalar::BSplineScalar;
-use crate::knots::knots_dump::KnotsDump;
+use crate::io::dump_knots::KnotsDump;
 use std::fs::File;
 use std::io::{BufWriter, Write};
 use ndarray::linspace;

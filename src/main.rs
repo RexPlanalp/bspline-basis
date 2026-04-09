@@ -1,6 +1,6 @@
 use bspline_basis::config::basis::BasisConfig;
 use bspline_basis::basis::complex::ComplexBSplineBasis;
-use bspline_basis::basis::dump_basis::BasisDump;
+use bspline_basis::io::dump_basis::BasisDump;
 use bspline_basis::core::dump::Dump;
 use bspline_basis::config::ecs::EcsConfig;
 use std::f64::consts::PI;

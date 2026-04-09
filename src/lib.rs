@@ -4,3 +4,4 @@ pub mod error;
 pub mod knots;
 pub mod transform;
 pub mod basis;
+pub mod io;
