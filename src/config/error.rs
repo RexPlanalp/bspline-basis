@@ -8,6 +8,7 @@ pub enum ConfigError {
     InvalidKnotRange { start: f64, end: f64 },
     InvalidEta { eta: f64 },
     InvalidR0 { start: f64, end: f64, r0: f64 },
+    InvalidOrder { order: usize },
 }
 
 impl fmt::Display for ConfigError {
@@ -31,6 +32,9 @@ impl fmt::Display for ConfigError {
             }
             ConfigError::InvalidR0 { start, end, r0 } => {
                 write!(f, "R0: {r0} must be between start: {start} and end: {end}.")
+            }
+            ConfigError::InvalidOrder { order } => {
+                write!(f, "Order: {order} not in supported range.")
             }
         }
     }

@@ -33,8 +33,11 @@ impl Config for RealKnotConfig {
 }
 
 pub struct RealKnotVector {
-    pub config: RealKnotConfig,
     pub knots: Vec<f64>,
+    pub n_knots: usize,
+    pub multiplicity: usize,
+    pub start: f64,
+    pub end: f64,
 }
 
 impl RealKnotVector {
@@ -44,8 +47,11 @@ impl RealKnotVector {
         let knots = build_linear_knots(&config);
 
         Ok(Self {
-            config: config.clone(),
             knots,
+            n_knots: config.n_knots,
+            multiplicity: config.multiplicity,
+            start: config.start,
+            end: config.end,
         })
     }
 }
