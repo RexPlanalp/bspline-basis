@@ -22,7 +22,7 @@ fn main() {
 
     let x_range: Vec<f64> = linspace(complex_basis.knot_vector().config.start, complex_basis.knot_vector().config.end, 1000).collect();
 
-    for i in 0..30 {
+    for i in 0..complex_basis.n_basis() {
         for &x in &x_range {
             let val = complex_basis.evaluator().b(i, x);
             writeln!(writer, "{} {}", val.re, val.im).unwrap();
