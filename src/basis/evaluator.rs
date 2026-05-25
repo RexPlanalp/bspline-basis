@@ -10,7 +10,7 @@ impl<'a> BSplineBasisEvaluator<'a, RealKnotVector> {
             i,
             x,
             self.basis.knot_vector(),
-            self.basis.order(),
+            self.basis.degree(),
         )
     }
 
@@ -19,7 +19,7 @@ impl<'a> BSplineBasisEvaluator<'a, RealKnotVector> {
             i,
             x,
             self.basis.knot_vector(),
-            self.basis.order(),
+            self.basis.degree(),
         )
     }
 }
@@ -30,7 +30,7 @@ impl<'a> BSplineBasisEvaluator<'a, ComplexKnotVector> {
             i,
             crate::core::ecs::ecs_x(x, self.basis.knot_vector.config.r0, self.basis.knot_vector.config.eta),
             self.basis.knot_vector(),
-            self.basis.order(),
+            self.basis.degree(),
         )
     }
 
@@ -39,7 +39,7 @@ impl<'a> BSplineBasisEvaluator<'a, ComplexKnotVector> {
             i,
             crate::core::ecs::ecs_x(x, self.basis.knot_vector.config.r0, self.basis.knot_vector.config.eta),
             self.basis.knot_vector(),
-            self.basis.order(),
+            self.basis.degree(),
         )
     }
 }
