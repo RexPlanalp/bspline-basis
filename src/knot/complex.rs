@@ -19,7 +19,7 @@ impl Config for ComplexKnotConfig {
         if self.eta > PI / 2.0 {
             return Err(ConfigError::InvalidEta { eta: self.eta });
         }
-        if self.r0 > self.start || self.r0 < self.end {
+        if self.r0 < self.start || self.r0 > self.end {
             return Err(ConfigError::InvalidR0 {
                 start: self.start,
                 end: self.end,
