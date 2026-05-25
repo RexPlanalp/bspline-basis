@@ -1,4 +1,4 @@
-use super::traits::BSplineScalar;
+use crate::BSplineScalar;
 
 impl BSplineScalar for f64 {
     fn from_usize(n: usize) -> Self {

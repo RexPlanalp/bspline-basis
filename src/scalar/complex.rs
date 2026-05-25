@@ -1,4 +1,4 @@
-use super::traits::BSplineScalar;
+use crate::BSplineScalar;
 
 use num_complex::Complex64;
 
