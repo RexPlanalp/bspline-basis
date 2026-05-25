@@ -1,7 +1,7 @@
 use crate::{BSplineScalar, KnotVector};
 use num_traits::{One, Zero};
 
-pub fn b<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar
+pub(crate) fn b<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar
 where
     KV: KnotVector,
 {
@@ -34,7 +34,7 @@ where
 }
 
 
-pub fn db<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar
+pub(crate) fn db<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar
 where
     KV: KnotVector,
 {

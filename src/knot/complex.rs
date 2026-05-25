@@ -1,5 +1,4 @@
 use crate::KnotVector;
-use crate::core::{ecs_x, find_best_r0};
 use crate::knot::builders::build_linear_knots;
 use crate::{Config, ConfigError, ConfigResult, RealKnotConfig};
 use num_complex::Complex64;
@@ -46,11 +45,11 @@ impl ComplexKnotVector {
         });
 
         let mut snapped_config = config.clone();
-        snapped_config.r0 = find_best_r0(&real_knots, config.r0);
+        snapped_config.r0 = crate::core::ecs::find_best_r0(&real_knots, config.r0);
 
         let knots: Vec<Complex64> = real_knots
             .iter()
-            .map(|x| ecs_x(*x, snapped_config.r0, snapped_config.eta))
+            .map(|x| crate::core::ecs::ecs_x(*x, snapped_config.r0, snapped_config.eta))
             .collect();
 
         Ok(Self {

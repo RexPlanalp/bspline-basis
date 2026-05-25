@@ -1,6 +1,6 @@
 use num_complex::Complex64;
 
-pub fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
+pub(crate) fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
     knots
         .iter()
         .copied()
@@ -13,7 +13,7 @@ pub fn find_best_r0(knots: &[f64], r0: f64) -> f64 {
         .unwrap()
 }
 
-pub fn ecs_x(x: f64, r0: f64, eta: f64) -> Complex64 {
+pub(crate) fn ecs_x(x: f64, r0: f64, eta: f64) -> Complex64 {
     if x < r0 {
         Complex64::from(x)
     } else {

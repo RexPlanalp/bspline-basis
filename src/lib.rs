@@ -11,4 +11,4 @@ pub use config::{Config, ConfigError, ConfigResult};
 mod core;
 
 mod basis;
-pub use basis::{BasisConfig, BSplineBasis};
+pub use basis::{BasisConfig, BSplineBasis, ComplexBSplineBasis};

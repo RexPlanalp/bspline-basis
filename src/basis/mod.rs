@@ -1,8 +1,8 @@
 mod real;
 mod complex;
-
-pub use real::RealBSplineBasis;
-
+pub use complex::ComplexBSplineBasis;
+mod evaluator;
+pub use evaluator::BSplineBasisEvaluator;
 use crate::{Config, ConfigError, KnotVector};
 
 pub struct BasisConfig {
@@ -29,7 +29,7 @@ pub struct BSplineBasis<KV: KnotVector> {
 }
 
 impl<KV: KnotVector> BSplineBasis<KV> {
-    pub(crate) fn new(knot_vector: KV, n_basis: usize, order: usize) -> Self {
+    pub fn new(knot_vector: KV, n_basis: usize, order: usize) -> Self {
         Self {
             knot_vector,
             n_basis,
@@ -51,5 +51,9 @@ impl<KV: KnotVector> BSplineBasis<KV> {
 
     pub fn degree(&self) -> usize {
         self.order - 1
+    }
+
+    pub fn evaluator(&self) -> BSplineBasisEvaluator<'_, KV> {
+        BSplineBasisEvaluator { basis: self }
     }
 }

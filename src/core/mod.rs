@@ -1,5 +1,3 @@
-mod ecs;
-pub use ecs::{ecs_x, find_best_r0};
+pub(crate) mod ecs;
+pub(crate) mod evaluation;
 
-mod evaluation;
-pub use evaluation::{b, db};
