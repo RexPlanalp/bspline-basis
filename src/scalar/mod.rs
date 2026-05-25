@@ -1,5 +1,7 @@
+// Internal submodules
 mod complex;
 mod real;
-mod traits;
+mod bspline_scalar;
 
-pub use traits::BSplineScalar;
+// Public API
+pub use bspline_scalar::BSplineScalar;
