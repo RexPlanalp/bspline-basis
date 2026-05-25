@@ -3,6 +3,7 @@ mod complex;
 mod real;
 
 pub use real::{RealKnotConfig, RealKnotVector};
+pub use complex::{ComplexKnotConfig, ComplexKnotVector};
 
 use crate::BSplineScalar;
 pub trait KnotVector {
