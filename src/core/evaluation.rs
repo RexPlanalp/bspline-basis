@@ -1,4 +1,7 @@
+// Internal Imports
 use crate::{BSplineScalar, KnotVector};
+
+// External Imports
 use num_traits::{One, Zero};
 
 pub(crate) fn b<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar

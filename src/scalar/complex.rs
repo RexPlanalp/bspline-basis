@@ -1,5 +1,7 @@
+// Internal Imports
 use crate::BSplineScalar;
 
+// External Imports
 use num_complex::Complex64;
 
 impl BSplineScalar for Complex64 {

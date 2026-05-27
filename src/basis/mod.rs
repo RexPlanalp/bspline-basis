@@ -1,9 +1,15 @@
+// Internal Submodules
 mod real;
 mod complex;
-pub use complex::ComplexBSplineBasis;
 mod evaluator;
+
+// Public API
+pub use complex::ComplexBSplineBasis;
 pub use evaluator::BSplineBasisEvaluator;
-use crate::{Config, ConfigError, KnotVector};
+
+// Internal Import
+use crate::{ConfigError, KnotVector};
+use crate::config::Config;
 
 pub struct BasisConfig {
     pub n_basis: usize,

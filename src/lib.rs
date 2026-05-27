@@ -2,11 +2,10 @@ mod scalar;
 pub use scalar::BSplineScalar;
 
 mod knot;
-pub use knot::KnotVector;
-pub use knot::{RealKnotConfig, RealKnotVector, ComplexKnotConfig, ComplexKnotVector};
+pub use knot::{KnotVector, RealKnotConfig, RealKnotVector, ComplexKnotConfig, ComplexKnotVector};
 
 mod config;
-pub use config::{Config, ConfigError, ConfigResult};
+pub use config::{ConfigError, ConfigResult};
 
 mod core;
 

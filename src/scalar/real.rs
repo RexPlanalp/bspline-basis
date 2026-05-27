@@ -1,4 +1,8 @@
+// Internal Imports
 use crate::BSplineScalar;
+
+// External Imports
+
 
 impl BSplineScalar for f64 {
     fn from_usize(n: usize) -> Self {

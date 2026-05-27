@@ -1,3 +1,6 @@
+// Internal Imports
+
+// External Imports
 use num_complex::Complex64;
 
 pub(crate) fn find_best_r0(knots: &[f64], r0: f64) -> f64 {

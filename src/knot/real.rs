@@ -1,8 +1,8 @@
-use crate::Config;
-use crate::ConfigError;
-use crate::ConfigResult;
-use crate::KnotVector;
+// Internal Imports
+use crate::config::Config;
 use crate::knot::builders::build_linear_knots;
+use crate::{ConfigError, ConfigResult, KnotVector};
+// External Imports
 
 #[derive(Clone)]
 pub struct RealKnotConfig {

@@ -1,6 +1,8 @@
-use crate::{
-    BasisConfig, BSplineBasis, Config, ConfigResult, RealKnotConfig, RealKnotVector,
-};
+// Internal Imports
+use crate::config::Config;
+use crate::{ BasisConfig, BSplineBasis, ConfigResult, RealKnotConfig, RealKnotVector};
+
+// External Imports
 
 pub type RealBSplineBasis = BSplineBasis<RealKnotVector>;
 

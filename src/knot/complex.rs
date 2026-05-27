@@ -1,8 +1,12 @@
-use crate::KnotVector;
-use crate::knot::builders::build_linear_knots;
-use crate::{Config, ConfigError, ConfigResult, RealKnotConfig};
+// Internal Imports
+use super::builders::build_linear_knots;
+use crate::config::Config;
+use crate::{ConfigError, ConfigResult, RealKnotConfig, KnotVector};
+
+// External Imports
 use num_complex::Complex64;
 use std::f64::consts::PI;
+
 #[derive(Clone)]
 pub struct ComplexKnotConfig {
     pub n_knots: usize,

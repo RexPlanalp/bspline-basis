@@ -1,6 +1,8 @@
-use crate::{
-    BasisConfig, BSplineBasis, Config, ConfigResult, ComplexKnotConfig, ComplexKnotVector,
-};
+// Internal Imports
+use crate::config::Config;
+use crate::{BasisConfig, BSplineBasis, ConfigResult, ComplexKnotConfig, ComplexKnotVector};
+
+// External Imports
 
 pub type ComplexBSplineBasis = BSplineBasis<ComplexKnotVector>;
 

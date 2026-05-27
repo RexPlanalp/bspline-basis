@@ -1,4 +1,7 @@
+// Internal Imports
 use crate::RealKnotConfig;
+
+// External Imports
 
 pub fn build_linear_knots(config: &RealKnotConfig) -> Vec<f64> {
     let n_middle = config.n_knots - 2 * config.multiplicity;

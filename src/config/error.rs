@@ -1,3 +1,6 @@
+// Internal Imports
+
+// External Imports
 use std::fmt;
 
 pub type ConfigResult<T> = std::result::Result<T, ConfigError>;
