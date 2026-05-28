@@ -1,7 +1,7 @@
 // Internal Imports
-use crate::config::Config;
+use crate::config::{Config, ConfigError, ConfigResult};
+use crate::knot::KnotVector;
 use crate::knot::builders::build_linear_knots;
-use crate::{ConfigError, ConfigResult, KnotVector};
 // External Imports
 
 #[derive(Clone)]
@@ -13,7 +13,7 @@ pub struct RealKnotConfig {
 }
 
 impl Config for RealKnotConfig {
-    fn validate(&self) -> crate::ConfigResult<()> {
+    fn validate(&self) -> ConfigResult<()> {
         if self.n_knots < 2 * self.multiplicity {
             return Err(ConfigError::InvalidNumberOfKnots {
                 n_knots: self.n_knots,

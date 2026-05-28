@@ -1,7 +1,7 @@
 // Internal Imports
 use super::builders::build_linear_knots;
-use crate::config::Config;
-use crate::{ConfigError, ConfigResult, RealKnotConfig, KnotVector};
+use crate::config::{Config, ConfigError, ConfigResult};
+use crate::knot::{KnotVector, RealKnotConfig};
 
 // External Imports
 use num_complex::Complex64;

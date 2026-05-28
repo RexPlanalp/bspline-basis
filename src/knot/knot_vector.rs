@@ -1,10 +1,10 @@
 // Internal Imports
-use crate::BSplineScalar;
+use crate::scalar::BSplineScalar;
 
 // External Imports
-use std::path::Path;
 use std::fs::File;
 use std::io::{BufWriter, Write};
+use std::path::Path;
 
 pub trait KnotVector {
     type Scalar: BSplineScalar;

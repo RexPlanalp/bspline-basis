@@ -1,5 +1,6 @@
 // Internal Imports
-use crate::{BSplineScalar, KnotVector};
+use crate::knot::KnotVector;
+use crate::scalar::BSplineScalar;
 
 // External Imports
 use num_traits::{One, Zero};
@@ -35,7 +36,6 @@ where
 
     term1 + term2
 }
-
 
 pub(crate) fn db<KV>(i: usize, x: KV::Scalar, knot_vector: &KV, degree: usize) -> KV::Scalar
 where

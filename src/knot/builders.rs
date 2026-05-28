@@ -1,5 +1,5 @@
 // Internal Imports
-use crate::RealKnotConfig;
+use super::RealKnotConfig;
 
 // External Imports
 

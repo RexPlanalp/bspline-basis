@@ -1,6 +1,7 @@
 // Internal Imports
-use crate::config::Config;
-use crate::{ BasisConfig, BSplineBasis, ConfigResult, RealKnotConfig, RealKnotVector};
+use super::{BSplineBasis, BasisConfig};
+use crate::config::{Config, ConfigResult};
+use crate::knot::{RealKnotConfig, RealKnotVector};
 
 // External Imports
 
@@ -19,10 +20,6 @@ impl RealBSplineBasis {
 
         let knot_vector = RealKnotVector::build(&knot_config)?;
 
-        Ok(Self::new(
-            knot_vector,
-            config.n_basis,
-            config.order,
-        ))
+        Ok(Self::new(knot_vector, config.n_basis, config.order))
     }
 }

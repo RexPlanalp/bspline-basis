@@ -1,5 +1,5 @@
 // Internal Imports
-use crate::BSplineScalar;
+use super::BSplineScalar;
 
 // External Imports
 use num_complex::Complex64;

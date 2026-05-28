@@ -1,7 +1,7 @@
 // Internal submodules
+mod bspline_scalar;
 mod complex;
 mod real;
-mod bspline_scalar;
 
 // Public API
 pub use bspline_scalar::BSplineScalar;

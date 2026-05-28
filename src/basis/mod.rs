@@ -1,15 +1,16 @@
 // Internal Submodules
-mod real;
 mod complex;
 mod evaluator;
+mod real;
 
 // Public API
 pub use complex::ComplexBSplineBasis;
 pub use evaluator::BSplineBasisEvaluator;
+pub use real::RealBSplineBasis;
 
 // Internal Import
-use crate::{ConfigError, KnotVector};
-use crate::config::Config;
+use crate::config::{Config, ConfigError, ConfigResult};
+use crate::knot::KnotVector;
 
 pub struct BasisConfig {
     pub n_basis: usize,
@@ -17,11 +18,9 @@ pub struct BasisConfig {
 }
 
 impl Config for BasisConfig {
-    fn validate(&self) -> crate::ConfigResult<()> {
+    fn validate(&self) -> ConfigResult<()> {
         if self.order > 8 {
-            return Err(ConfigError::InvalidOrder {
-                order: self.order,
-            });
+            return Err(ConfigError::InvalidOrder { order: self.order });
         }
 
         Ok(())
