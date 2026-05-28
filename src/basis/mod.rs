@@ -2,12 +2,15 @@
 mod complex;
 mod evaluator;
 mod real;
+mod integrator;
 
 // Public API
 pub use complex::ComplexBSplineBasis;
 pub use evaluator::BSplineBasisEvaluator;
+pub use integrator::BSplineBasisIntegrator;
 pub use real::RealBSplineBasis;
 
+use crate::basis::integrator::find_params;
 // Internal Import
 use crate::config::{Config, ConfigError, ConfigResult};
 use crate::knot::KnotVector;
@@ -60,5 +63,10 @@ impl<KV: KnotVector> BSplineBasis<KV> {
 
     pub fn evaluator(&self) -> BSplineBasisEvaluator<'_, KV> {
         BSplineBasisEvaluator { basis: self }
+    }
+
+    pub fn integrator(&self) -> BSplineBasisIntegrator<'_, KV> {
+        let (roots,weights) = find_params(self.order);
+        BSplineBasisIntegrator { basis: self, roots, weights }
     }
 }
