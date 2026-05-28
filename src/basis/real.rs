@@ -20,6 +20,6 @@ impl RealBSplineBasis {
 
         let knot_vector = RealKnotVector::build(&knot_config)?;
 
-        Ok(Self::new(knot_vector, config.n_basis, config.order))
+        Ok(Self{knot_vector, n_basis: config.n_basis, order: config.order})
     }
 }

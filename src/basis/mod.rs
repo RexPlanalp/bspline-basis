@@ -37,13 +37,6 @@ pub struct BSplineBasis<KV: KnotVector> {
 }
 
 impl<KV: KnotVector> BSplineBasis<KV> {
-    pub fn new(knot_vector: KV, n_basis: usize, order: usize) -> Self {
-        Self {
-            knot_vector,
-            n_basis,
-            order,
-        }
-    }
 
     pub fn knot_vector(&self) -> &KV {
         &self.knot_vector
