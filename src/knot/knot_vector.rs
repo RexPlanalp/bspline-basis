@@ -1,5 +1,6 @@
 // Internal Imports
 use crate::scalar::BSplineScalar;
+use crate::config::Config;
 
 // External Imports
 use std::fs::File;
@@ -8,8 +9,10 @@ use std::path::Path;
 
 pub trait KnotVector {
     type Scalar: BSplineScalar;
+    type Configuration: Config;
 
     fn knots(&self) -> &[Self::Scalar];
+    fn config(&self) -> &Self::Configuration;
 
     fn outfile(&self) -> &'static str {
         "knots.txt"

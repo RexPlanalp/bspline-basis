@@ -33,8 +33,8 @@ impl Config for ComplexKnotConfig {
     }
 }
 pub struct ComplexKnotVector {
-    pub config: ComplexKnotConfig,
-    pub knots: Vec<Complex64>,
+    config: ComplexKnotConfig,
+    knots: Vec<Complex64>,
 }
 
 impl ComplexKnotVector {
@@ -65,6 +65,11 @@ impl ComplexKnotVector {
 
 impl KnotVector for ComplexKnotVector {
     type Scalar = Complex64;
+    type Configuration = ComplexKnotConfig;
+
+    fn config(&self) -> &Self::Configuration {
+        &self.config
+    }
 
     fn knots(&self) -> &[Self::Scalar] {
         &self.knots

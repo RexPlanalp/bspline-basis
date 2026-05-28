@@ -1,3 +1,5 @@
+use num_traits::real::Real;
+
 // Internal Imports
 use crate::config::{Config, ConfigError, ConfigResult};
 use crate::knot::KnotVector;
@@ -33,11 +35,8 @@ impl Config for RealKnotConfig {
 }
 
 pub struct RealKnotVector {
-    pub knots: Vec<f64>,
-    pub n_knots: usize,
-    pub multiplicity: usize,
-    pub start: f64,
-    pub end: f64,
+    config: RealKnotConfig,
+    knots: Vec<f64>
 }
 
 impl RealKnotVector {
@@ -47,17 +46,19 @@ impl RealKnotVector {
         let knots = build_linear_knots(&config);
 
         Ok(Self {
-            knots,
-            n_knots: config.n_knots,
-            multiplicity: config.multiplicity,
-            start: config.start,
-            end: config.end,
+            config: config.clone(),
+            knots
         })
     }
 }
 
 impl KnotVector for RealKnotVector {
     type Scalar = f64;
+    type Configuration = RealKnotConfig;
+
+    fn config(&self) -> &Self::Configuration {
+        &self.config
+    }
 
     fn knots(&self) -> &[Self::Scalar] {
         &self.knots

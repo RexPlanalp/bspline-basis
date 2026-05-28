@@ -20,8 +20,8 @@ fn main() -> std::io::Result<()> {
     let mut writer = BufWriter::new(output_file);
 
     let x_range: Vec<f64> = linspace(
-        complex_basis.knot_vector().config.start,
-        complex_basis.knot_vector().config.end,
+        complex_basis.knot_vector().config().start,
+        complex_basis.knot_vector().config().end,
         1000,
     )
     .collect();

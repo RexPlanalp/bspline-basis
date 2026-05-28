@@ -22,7 +22,7 @@ pub struct BasisConfig {
 
 impl Config for BasisConfig {
     fn validate(&self) -> ConfigResult<()> {
-        if self.order > 8 {
+        if self.order > 8 || self.order < 2 {
             return Err(ConfigError::InvalidOrder { order: self.order });
         }
 
