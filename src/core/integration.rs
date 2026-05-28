@@ -18,7 +18,7 @@ where
     let lower = min(i,j);
     let upper = max(i,j);
 
-    for k in lower..=upper + basis.n_basis() {
+    for k in lower..=upper + basis.degree() {
         let (a,b) = basis.knot_vector().interval(k);
 
         if a == b {
