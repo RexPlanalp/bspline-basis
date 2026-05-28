@@ -71,6 +71,14 @@ impl KnotVector for ComplexKnotVector {
         &self.config
     }
 
+    fn parameter_domain(&self) -> (f64, f64) {
+        (self.config().start, self.config().end)
+    }
+
+    fn parameter_to_knot(&self, x: f64) -> Self::Scalar {
+        crate::core::ecs::ecs_x(x, self.config().r0, self.config().eta)
+    }
+
     fn knots(&self) -> &[Self::Scalar] {
         &self.knots
     }

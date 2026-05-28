@@ -1,5 +1,3 @@
-use num_traits::real::Real;
-
 // Internal Imports
 use crate::config::{Config, ConfigError, ConfigResult};
 use crate::knot::KnotVector;
@@ -58,6 +56,14 @@ impl KnotVector for RealKnotVector {
 
     fn config(&self) -> &Self::Configuration {
         &self.config
+    }
+
+    fn parameter_domain(&self) -> (f64, f64) {
+        (self.config().start, self.config().end)
+    }
+
+    fn parameter_to_knot(&self, x: f64) -> Self::Scalar {
+        x
     }
 
     fn knots(&self) -> &[Self::Scalar] {
