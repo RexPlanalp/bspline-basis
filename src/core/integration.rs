@@ -1,25 +1,32 @@
 // Internal Imports
+use crate::basis::BSplineBasis;
 use crate::knot::KnotVector;
 use crate::scalar::BSplineScalar;
-use crate::basis::BSplineBasis;
 
 // External Imports
-use num_traits::{Zero};
-use std::cmp::{min, max};
+use num_traits::Zero;
+use std::cmp::{max, min};
 
-pub(crate) fn integrate<KV: KnotVector, F>(i: usize, j: usize, basis: &BSplineBasis<KV>, roots: &[f64], weights: &[f64], integrand: F) -> KV::Scalar
-where 
-    F: Fn(usize, usize, KV::Scalar, &KV, usize) -> KV::Scalar
+pub(crate) fn integrate<KV: KnotVector, F>(
+    i: usize,
+    j: usize,
+    basis: &BSplineBasis<KV>,
+    roots: &[f64],
+    weights: &[f64],
+    integrand: F,
+) -> KV::Scalar
+where
+    F: Fn(usize, usize, KV::Scalar, &KV, usize) -> KV::Scalar,
 {
     let mut result = KV::Scalar::zero();
 
     let half = KV::Scalar::from_f64(0.5);
 
-    let lower = min(i,j);
-    let upper = max(i,j);
+    let lower = min(i, j);
+    let upper = max(i, j);
 
     for k in lower..=upper + basis.degree() {
-        let (a,b) = basis.knot_vector().interval(k);
+        let (a, b) = basis.knot_vector().interval(k);
 
         if a == b {
             continue;
@@ -28,7 +35,7 @@ where
         let half_b_minus_a = half * (b - a);
         let half_b_plus_a = half * (b + a);
 
-        for (r,w) in roots.iter().zip(weights.iter()) {
+        for (r, w) in roots.iter().zip(weights.iter()) {
             let r = KV::Scalar::from_f64(*r);
             let w = KV::Scalar::from_f64(*w) * half_b_minus_a;
 

@@ -34,7 +34,7 @@ impl Config for RealKnotConfig {
 
 pub struct RealKnotVector {
     config: RealKnotConfig,
-    knots: Vec<f64>
+    knots: Vec<f64>,
 }
 
 impl RealKnotVector {
@@ -45,7 +45,7 @@ impl RealKnotVector {
 
         Ok(Self {
             config: config.clone(),
-            knots
+            knots,
         })
     }
 }

@@ -1,6 +1,6 @@
 // Internal Imports
-use crate::scalar::BSplineScalar;
 use crate::config::Config;
+use crate::scalar::BSplineScalar;
 
 // External Imports
 use std::fs::File;
@@ -30,7 +30,7 @@ pub trait KnotVector {
     fn parameter_domain(&self) -> (f64, f64);
 
     fn parameter_to_knot(&self, x: f64) -> Self::Scalar;
-    
+
     fn dump(&self) -> std::io::Result<()> {
         let path = Path::new("output").join(self.outfile());
         let output_file = File::create(path)?;

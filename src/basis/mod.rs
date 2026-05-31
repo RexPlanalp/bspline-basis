@@ -1,8 +1,8 @@
 // Internal Submodules
 mod complex;
 mod evaluator;
-mod real;
 mod integrator;
+mod real;
 
 // Public API
 pub use complex::ComplexBSplineBasis;
@@ -11,15 +11,15 @@ pub use integrator::BSplineBasisIntegrator;
 pub use real::RealBSplineBasis;
 
 // Internal Import
+use crate::basis::integrator::find_params;
 use crate::config::{Config, ConfigError, ConfigResult};
 use crate::knot::KnotVector;
-use crate::basis::integrator::find_params;
 use crate::scalar::BSplineScalar;
 
 // External Imports
+use ndarray::linspace;
 use std::fs::File;
 use std::io::{BufWriter, Write};
-use ndarray::linspace;
 
 pub struct BasisConfig {
     pub n_basis: usize,
@@ -43,7 +43,6 @@ pub struct BSplineBasis<KV: KnotVector> {
 }
 
 impl<KV: KnotVector> BSplineBasis<KV> {
-
     pub fn knot_vector(&self) -> &KV {
         &self.knot_vector
     }
@@ -65,8 +64,12 @@ impl<KV: KnotVector> BSplineBasis<KV> {
     }
 
     pub fn integrator(&self) -> BSplineBasisIntegrator<'_, KV> {
-        let (roots,weights) = find_params(self.order);
-        BSplineBasisIntegrator { basis: self, roots, weights }
+        let (roots, weights) = find_params(self.order);
+        BSplineBasisIntegrator {
+            basis: self,
+            roots,
+            weights,
+        }
     }
 
     pub fn dump(&self, samples: usize) -> std::io::Result<()> {
@@ -82,7 +85,7 @@ impl<KV: KnotVector> BSplineBasis<KV> {
         let x_range: Vec<f64> = linspace(start, end, samples).collect();
 
         for i in 0..self.n_basis() {
-            for x in &x_range{
+            for x in &x_range {
                 let val = self.evaluator().b(i, *x);
                 writeln!(b_writer, "{} {}", val.real(), val.imag())?;
 
@@ -98,7 +101,6 @@ impl<KV: KnotVector> BSplineBasis<KV> {
         for x in &x_range {
             writeln!(metadata_writer, "{x}")?;
         }
-
 
         Ok(())
     }

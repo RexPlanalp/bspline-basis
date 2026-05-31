@@ -1,5 +1,5 @@
-use std::f64::consts::PI;
 use bspline_basis::{BasisConfig, ComplexBSplineBasis};
+use std::f64::consts::PI;
 
 fn main() -> std::io::Result<()> {
     let config = BasisConfig {
