@@ -1,13 +1,7 @@
 use std::f64::consts::PI;
-use std::fs::{File, create_dir_all};
-use std::io::{BufWriter, Write};
-
-use bspline_basis::{BasisConfig, ComplexBSplineBasis, KnotVector};
-use ndarray::linspace;
+use bspline_basis::{BasisConfig, ComplexBSplineBasis};
 
 fn main() -> std::io::Result<()> {
-    create_dir_all("output")?;
-
     let config = BasisConfig {
         n_basis: 30,
         order: 7,
