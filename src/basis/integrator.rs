@@ -96,6 +96,12 @@ impl<'a, KV: KnotVector> BSplineBasisIntegrator<'a, KV> {
             potential_integrand(i, j, x, knot_vector, degree, &potential)
         })
     }
+
+    pub fn set_quadrature(&mut self, order: usize) {
+        let (roots, weights) = find_params(order);
+        self.roots = roots;
+        self.weights = weights;
+    }
 }
 
 fn kinetic_integrand<KV: KnotVector>(
