@@ -22,6 +22,16 @@ pub trait KnotVector {
         (self.knots()[i], self.knots()[i + 1])
     }
 
+    fn interval_span(&self, i: usize, j: usize) -> (Self::Scalar, Self::Scalar) {
+        (self.knots()[i], self.knots()[j])
+    }
+
+    fn in_interval_span(&self, x: Self::Scalar, i: usize, j:usize) -> bool {
+        let (start, end) = self.interval_span(i, j);
+        x.real() >= start.real() && x.real() < end.real()
+        
+    }
+
     fn in_interval(&self, x: Self::Scalar, i: usize) -> bool {
         let (start, end) = self.interval(i);
         x.real() >= start.real() && x.real() < end.real()
